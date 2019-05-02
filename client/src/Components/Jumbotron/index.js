@@ -1,14 +1,9 @@
 import React from "react"
+import "./style.css"
 
 const Jumbotron = ({children}) =>{
-    const style = {
-        height: "300px",
-        textAlign: "center",
-        backgroundColor: "lightgray",
-        margin: "10px auto",
-        padding: "10px"
-    }
-    return <div className="jumbotron" style={style}>
+
+    return <div className="jumbotron">
 
             <h3>(React) Google Book Search</h3>
             <h4>Search for and Save Books of Interest</h4>

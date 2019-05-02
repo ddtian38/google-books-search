@@ -1,10 +1,8 @@
 import React from "react"
 
-const Button = (props) => {
+const Button = ({onClicked, children}) => {
     return(
-        <button class="btn waves-effect waves-light" {...props}>{props.children}
-        <i class="material-icons right">send</i>
-      </button>
+        <button className="btn waves-effect waves-dark" onClicked =  {onClicked}>{children}</button>
     )
 }
 

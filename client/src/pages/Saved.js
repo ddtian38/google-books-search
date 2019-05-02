@@ -1,11 +1,16 @@
 import React, {Component} from "react"
+import { CardContainer, Card } from "../Components/Cards";
+import { Container } from "../Components/Grid";
 
 class Saved extends Component{
     render(){
         return(
-            <div>
-                 <h2>Saved Books</h2>
-            </div>
+            <Container>
+                <CardContainer>
+                    <h3>Saved</h3>
+                    <Card/>
+                </CardContainer>
+            </Container>
         )
     }
 }

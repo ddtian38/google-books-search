@@ -1,6 +1,7 @@
 import React, {Component} from "react"
-import Container from "../Components/Container";
-import Jumbotron from "../Components/Jumbotron"
+import {Container} from "../Components/Grid/index";
+import Form from "../Components/Form/index"
+import { CardContainer, Card } from "../Components/Cards";
 
 
 class Home extends Component{
@@ -9,9 +10,13 @@ class Home extends Component{
 
         return(
             <Container>
-    
-                <Jumbotron/>
-                
+                <Form/>
+                <CardContainer>
+                    <h3>Results</h3>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                </CardContainer>
             </Container>
         )
 
