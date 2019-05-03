@@ -15,7 +15,6 @@ class Saved extends Component{
     getSavedBooks = () => {
         API.getBooks()
         .then(({data}) => {
-            console.log(data)
             this.setState({books: data})
         })
     }
@@ -27,11 +26,6 @@ class Saved extends Component{
             this.getSavedBooks()
         })
     }
-
-    // componentDidUpdate(){
-    //     this.getSavedBooks()
-        
-    // }
     
     
     render(){
@@ -50,7 +44,7 @@ class Saved extends Component{
                          author= {book.author}
                          viewLink = {book.viewLink}
                          imgLink = {book.imageLink}
-                         summary = {book.synposis}
+                         summary = {book.synopsis}
                          secondButton = {"Delete"}
                          secondButtonHandler ={()=>{this.deleteSavedBooks(book._id)}}
                          />

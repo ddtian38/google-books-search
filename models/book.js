@@ -15,7 +15,7 @@ const bookSchema = new Schema({
 
     synopsis: {
         type: String,
-        default: "No summary avaiable"
+        default: "No summary avaiable."
     },
 
     viewLink:{

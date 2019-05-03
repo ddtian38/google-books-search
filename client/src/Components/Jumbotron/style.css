@@ -3,6 +3,11 @@
     text-align:center;
     background-image: url("https://vignette.wikia.nocookie.net/starwars/images/1/15/Library_Busts_AotC.png/revision/latest/scale-to-width-down/1000?cb=20180629185842");
     margin: 10px auto;
-    padding: 10px;
+    padding: 15px;
+    text-shadow: 5px 5px black;
     color: white;
+}
+
+.jumbotron h3, .jumbotron h4{
+    margin: 50px;
 }

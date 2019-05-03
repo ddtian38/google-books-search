@@ -16,8 +16,7 @@ class Home extends Component{
     componentDidMount(){
         API.search("Band of Brothers")
         .then((res) => {
-            console.log(res)
-            this.setState({results: res.data.items})
+            this.setState({results: res.data.items})   
         })
         .catch((err)=> {console.log(err)})
     }
@@ -31,23 +30,23 @@ class Home extends Component{
     searchHandler = (event)=>{
         event.preventDefault();
         API.search(this.state.search)
-            .then((res) => {
-                console.log(res)
-                this.setState({results: res.data.items})
-                console.log(this.state)
-            })
+        .then((res) => {
+            console.log(res.data)
+            console.log(res.data.totalItems)
+            if (res.data.totalItems > 0){
+                return this.setState({results: res.data.items})
+            }
+            return this.setState({results: []}) 
+        })
             .catch((err)=> {console.log(err)})
     }
 
     saveBook = (bookObj) => {
-           
-            console.log("xxxx")
-            // console.log(bookObj)
             API.saveBook(bookObj)
     }
 
     render(){
-        console.log(this.state.results)
+        console.log(this.state.results.length)
         return(
             <Container>
                 <Form
@@ -59,28 +58,36 @@ class Home extends Component{
                 <CardContainer>
                    {(this.state.results.length === 0) ? (<h4>No Results found!</h4>) :
                      (this.state.results.map( ({volumeInfo}, index) => {
-                        console.log(volumeInfo.imageLinks)
                          return  <Card
                          key = {index}
                          title={volumeInfo.title}
                          author= {
-                             volumeInfo.authors.join(", ")
+                             (volumeInfo.authors) ? volumeInfo.authors.join(", ") : ("No author indicated")
                         }
                          viewLink = {volumeInfo.infoLink}
                          imgLink = {(volumeInfo.imageLinks) ? (volumeInfo.imageLinks.thumbnail): ("https://via.placeholder.com/150")}
                          summary = {volumeInfo.description}
                          secondButton = {"Save"}
                          secondButtonHandler ={()=>{
-                            let image;
+
+                            let image, author = volumeInfo.authors;
+
+                            if(author){
+                                author = author.join(", ")
+                            }else{
+                                author = "No author indicated"
+                            }
                             (volumeInfo.imageLinks) ? (image = volumeInfo.imageLinks.thumbnail): (image = "https://via.placeholder.com/150")
+
                             this.saveBook({
                                 title: volumeInfo.title,
-                                author: volumeInfo.authors.join(", "),
-                                synposis: volumeInfo.description,
+                                author: author,
+                                synopsis: volumeInfo.description,
                                 viewLink: volumeInfo.infoLink,
                                 imageLink: image,
                             } 
-                         )}}
+                         )
+                       }}
                          />
                         })
                         )

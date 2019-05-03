@@ -13,7 +13,7 @@ export function Card({title, author, secondButton, viewLink, imgLink, summary, s
             <Row>
                 <Col size="s9">
                     <Row><h4>{title}</h4></Row>
-                    <Row><h5>By: {author}</h5></Row>
+                    <Row><h5>{(author) ? ("By: " + author) : ("No author is indicated.")}</h5></Row>
                 </Col>
                 <Col size="s3">
                     <a href={viewLink}><Button>View</Button></a>
@@ -25,7 +25,7 @@ export function Card({title, author, secondButton, viewLink, imgLink, summary, s
                     <img src={imgLink} alt="Book"/>
                 </Col>
                 <Col size="s9">
-                    <p>Summary: {summary||"No summary exists"}</p>
+                    <p> {(summary) ? ("Summary: " + summary):("No summary exists")}</p>
                 </Col>
             </Row>
 
