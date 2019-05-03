@@ -13,6 +13,15 @@ class Home extends Component{
         results: []
     }
 
+    componentDidMount(){
+        API.search("Band of Brothers")
+        .then((res) => {
+            console.log(res)
+            this.setState({results: res.data.items})
+        })
+        .catch((err)=> {console.log(err)})
+    }
+
     onChangeHandler = (event)=>{
             let {name, value} = event.target
             this.setState({[name]: value})
@@ -25,6 +34,7 @@ class Home extends Component{
             .then((res) => {
                 console.log(res)
                 this.setState({results: res.data.items})
+                console.log(this.state)
             })
             .catch((err)=> {console.log(err)})
     }
@@ -63,20 +73,16 @@ class Home extends Component{
                          secondButtonHandler ={()=>{
                             let image;
                             (volumeInfo.imageLinks) ? (image = volumeInfo.imageLinks.thumbnail): (image = "https://via.placeholder.com/150")
-                            this.saveBook(
-                            
-                            {
+                            this.saveBook({
                                 title: volumeInfo.title,
                                 author: volumeInfo.authors.join(", "),
                                 synposis: volumeInfo.description,
                                 viewLink: volumeInfo.infoLink,
                                 imageLink: image,
                             } 
-
                          )}}
                          />
-                        }
-                        )
+                        })
                         )
                     }
                 </CardContainer>

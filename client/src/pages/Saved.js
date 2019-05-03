@@ -1,29 +1,63 @@
 import React, {Component} from "react"
 import { CardContainer, Card } from "../Components/Cards";
 import { Container } from "../Components/Grid";
+import API from "../utils/API"
 
 class Saved extends Component{
     state = {
         books: []
     }
 
+    componentDidMount(){
+        this.getSavedBooks()
+    }
+
+    getSavedBooks = () => {
+        API.getBooks()
+        .then(({data}) => {
+            console.log(data)
+            this.setState({books: data})
+        })
+    }
+
+    deleteSavedBooks = (id) => {
+        console.log(id)
+        API.deleteBook(id)        
+        .then(({data}) => {
+            this.getSavedBooks()
+        })
+    }
+
+    // componentDidUpdate(){
+    //     this.getSavedBooks()
+        
+    // }
     
     
     render(){
+        console.log(this.state.books.length)
         return(
             <Container>
                 <CardContainer>
                     <h3>Saved</h3>
+                    {
                     
-                    <Card
-                    key = {1}
-                    title={"John Doe"}
-                    author= {"John Doe"}
-                    viewLink = {"John Doe"}
-                    imgLink = {"https://via.placeholder.com/150"}
-                    summary = {"John Doe"}
-                    secondButton = {"Delete"}
-                    onClicked ={"hi"} />
+                    (this.state.books.length === 0) ? (<h4>You have not saved any books yet!</h4>) :
+                     (this.state.books.map( (book) => {
+                         return  <Card
+                         key = {book._id}
+                         title={book.title}
+                         author= {book.author}
+                         viewLink = {book.viewLink}
+                         imgLink = {book.imageLink}
+                         summary = {book.synposis}
+                         secondButton = {"Delete"}
+                         secondButtonHandler ={()=>{this.deleteSavedBooks(book._id)}}
+                         />
+                        })
+                        )
+                    }
+
                 </CardContainer>
             </Container>
         )

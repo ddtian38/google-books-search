@@ -5,7 +5,7 @@ module.exports = {
         console.log("getting  saved books")
 
         db.Book
-            .find()
+            .find({saved: true})
             .sort({date: -1})
             .then((dbModel) => res.json(dbModel))
             .catch(err => res.status(422).json(err))
@@ -21,9 +21,11 @@ module.exports = {
 
     remove:function(req, res){
         console.log("removing book")
-
-        db.Book.findById({_id: req.param.id})
-        .then(dbModel => dbModel.remove())
+        db.Book.findById({_id: req.params.id})
+        .then(dbModel => {
+            console.log(dbModel)
+            dbModel.remove()
+        })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     }
