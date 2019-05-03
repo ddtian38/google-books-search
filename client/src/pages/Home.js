@@ -53,7 +53,9 @@ class Home extends Component{
                          return  <Card
                          key = {index}
                          title={volumeInfo.title}
-                         author= {volumeInfo.authors}
+                         author= {
+                             volumeInfo.authors.join(", ")
+                        }
                          viewLink = {volumeInfo.infoLink}
                          imgLink = {(volumeInfo.imageLinks) ? (volumeInfo.imageLinks.thumbnail): ("https://via.placeholder.com/150")}
                          summary = {volumeInfo.description}
@@ -65,7 +67,7 @@ class Home extends Component{
                             
                             {
                                 title: volumeInfo.title,
-                                author: volumeInfo.authors,
+                                author: volumeInfo.authors.join(", "),
                                 synposis: volumeInfo.description,
                                 viewLink: volumeInfo.infoLink,
                                 imageLink: image,
