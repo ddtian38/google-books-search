@@ -43,6 +43,7 @@ class Home extends Component{
 
     saveBook = (bookObj) => {
             API.saveBook(bookObj)
+            alert("Your book has been saved.")
     }
 
     render(){
@@ -57,6 +58,7 @@ class Home extends Component{
                 <h3>Results</h3>
                 <CardContainer>
                    {(this.state.results.length === 0) ? (<h4>No Results found!</h4>) :
+
                      (this.state.results.map( ({volumeInfo}, index) => {
                          return  <Card
                          key = {index}
