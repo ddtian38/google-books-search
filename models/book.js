@@ -15,6 +15,17 @@ const bookSchema = new Schema({
 
     synopsis: {
         type: String,
+        default: "No summary avaiable"
+    },
+
+    viewLink:{
+        type: String,
+        required: true
+    },
+
+    imageLink:{
+        type: String,
+        default: "https://via.placeholder.com/150"
     },
 
     saved:{

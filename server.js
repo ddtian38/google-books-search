@@ -3,7 +3,6 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const apiRoutes = require("./routes/api/index")
-const axios = require("axios");
 
 const mongoose = require("mongoose")
 
@@ -19,15 +18,8 @@ if (process.env.NODE_ENV === "production") {
 // Define API routes here
 
 
-express.Router().use("/api", apiRoutes)
+app.use("/api", apiRoutes)
 
-express.Router().get("/search", (req, res)=>{
-  console.log(req.query)
-  axios
-      .get("https://www.googleapis.com/books/v1/volumes", { params: req.query })
-      .then(({data})=>res.send("chicken"))
-      .catch(err => res.status(422).json(err));
-})
 
 // Send every other request to the React app
 // Define any API routes before this runs

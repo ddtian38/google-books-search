@@ -9,7 +9,7 @@ const Form = (props) => {
         padding: "25px"
     }
     return(
-        <form {...props} style = {style}>
+        <form style = {style}>
             <h4>Book Search</h4>
              <Label for="search">Book</Label><br/>
             <Input type="text" name="search" placeholder="" onChange = {props.onChange} value = {props.value} /><br/>

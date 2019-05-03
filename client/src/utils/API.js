@@ -4,7 +4,7 @@ export default {
 
   search: function(query){
       console.log(query)
-      return axios.get("/search", { params: { q: query } });
+      return axios.get("/api/search", { params: { q: query } });
 
   },
 
@@ -18,6 +18,7 @@ export default {
   },
   // Saves a book to the database
   saveBook: function(bookData) {
+    console.log(bookData)
     return axios.post("/api/books", bookData);
   }
 };

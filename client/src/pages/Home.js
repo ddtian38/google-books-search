@@ -7,6 +7,7 @@ import API from "../utils/API"
 
 class Home extends Component{
 
+    //Setting initial states
     state = {
         search: "",
         results: []
@@ -14,21 +15,29 @@ class Home extends Component{
 
     onChangeHandler = (event)=>{
             let {name, value} = event.target
-            console.log(value)
             this.setState({[name]: value})
-
 
     }
 
     searchHandler = (event)=>{
         event.preventDefault();
-        console.log(this.state.search)
         API.search(this.state.search)
-            .then((res) => {console.log(res)})
+            .then((res) => {
+                console.log(res)
+                this.setState({results: res.data.items})
+            })
             .catch((err)=> {console.log(err)})
     }
-    render(){
 
+    saveBook = (bookObj) => {
+           
+            console.log("xxxx")
+            // console.log(bookObj)
+            API.saveBook(bookObj)
+    }
+
+    render(){
+        console.log(this.state.results)
         return(
             <Container>
                 <Form
@@ -36,11 +45,38 @@ class Home extends Component{
                 value = {this.state.search}
                 onClicked = {this.searchHandler}
                 />
+                <h3>Results</h3>
                 <CardContainer>
-                    <h3>Results</h3>
-                    <Card/>
-                    <Card/>
-                    <Card/>
+                   {(this.state.results.length === 0) ? (<h4>No Results found!</h4>) :
+                     (this.state.results.map( ({volumeInfo}, index) => {
+                        console.log(volumeInfo.imageLinks)
+                         return  <Card
+                         key = {index}
+                         title={volumeInfo.title}
+                         author= {volumeInfo.authors}
+                         viewLink = {volumeInfo.infoLink}
+                         imgLink = {(volumeInfo.imageLinks) ? (volumeInfo.imageLinks.thumbnail): ("https://via.placeholder.com/150")}
+                         summary = {volumeInfo.description}
+                         secondButton = {"Save"}
+                         secondButtonHandler ={()=>{
+                            let image;
+                            (volumeInfo.imageLinks) ? (image = volumeInfo.imageLinks.thumbnail): (image = "https://via.placeholder.com/150")
+                            this.saveBook(
+                            
+                            {
+                                title: volumeInfo.title,
+                                author: volumeInfo.authors,
+                                synposis: volumeInfo.description,
+                                viewLink: volumeInfo.infoLink,
+                                imageLink: image,
+                            } 
+
+                         )}}
+                         />
+                        }
+                        )
+                        )
+                    }
                 </CardContainer>
             </Container>
         )
