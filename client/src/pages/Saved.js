@@ -3,6 +3,10 @@ import { CardContainer, Card } from "../Components/Cards";
 import { Container } from "../Components/Grid";
 
 class Saved extends Component{
+    state = {
+        books: []
+    }
+    
     render(){
         return(
             <Container>

@@ -12,8 +12,8 @@ const Form = (props) => {
         <form {...props} style = {style}>
             <h4>Book Search</h4>
              <Label for="search">Book</Label><br/>
-            <Input type="text" name="search" placeholder=""/><br/>
-            <Button><i class="material-icon"></i>Search</Button>
+            <Input type="text" name="search" placeholder="" onChange = {props.onChange} value = {props.value} /><br/>
+            <Button onClicked = {props.onClicked}><i className="material-icon"></i>Search</Button>
 
         </form>
     )

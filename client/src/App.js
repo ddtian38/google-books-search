@@ -6,6 +6,8 @@ import { Container } from "./Components/Grid/index"
 import Jumbotron from "./Components/Jumbotron/index"
 import Home from "./pages/Home"
 import Saved from "./pages/Saved"
+import Error from "./pages/Error"
+
 
 
 class App extends Component {

@@ -2,7 +2,9 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const routes = require("./routes")
+const apiRoutes = require("./routes/api/index")
+const axios = require("axios");
+
 const mongoose = require("mongoose")
 
 // Define middleware here
@@ -16,6 +18,17 @@ if (process.env.NODE_ENV === "production") {
 
 // Define API routes here
 
+
+express.Router().use("/api", apiRoutes)
+
+express.Router().get("/search", (req, res)=>{
+  console.log(req.query)
+  axios
+      .get("https://www.googleapis.com/books/v1/volumes", { params: req.query })
+      .then(({data})=>res.send("chicken"))
+      .catch(err => res.status(422).json(err));
+})
+
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
@@ -24,7 +37,7 @@ app.get("*", (req, res) => {
 
 
 //Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooksearchDB");
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

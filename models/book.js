@@ -19,7 +19,13 @@ const bookSchema = new Schema({
 
     saved:{
         type: Boolean,
+        required: true,
         default: false
+    },
+    
+    date: { 
+        type: Date, 
+        default: Date.now 
     }
 })
 
